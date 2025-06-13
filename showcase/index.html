@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garage Door Web Portfolio — Sreekant Baheti</title>
+  <style>
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a24;
+      --surface2: #22222f;
+      --accent: #6c63ff;
+      --accent2: #ff6b6b;
+      --accent3: #43e97b;
+      --text: #e8e8f0;
+      --muted: #888899;
+      --border: #2a2a3a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── HERO ─────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px 60px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, #1a1060 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(108,99,255,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(67,233,123,.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(108,99,255,.15);
+      border: 1px solid rgba(108,99,255,.3);
+      color: #a89dff;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, #a89dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 32px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6c63ff, #43e97b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ─── MAIN ──────────────────────────────── */
+    main { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ─── SECTION HEADER ───────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 56px 0 24px;
+    }
+    .section-header h2 { font-size: 1.4rem; font-weight: 700; }
+    .section-pill {
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(108,99,255,.15);
+      color: #a89dff;
+      border: 1px solid rgba(108,99,255,.25);
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* ─── TECH STACK BANNER ─────────────────── */
+    .tech-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: .78rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .tech-tag .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ─── SITE GRID ─────────────────────────── */
+    .site-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: rgba(108,99,255,.45);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(108,99,255,.12);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .card-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .card-icon.blue   { background: rgba(108,99,255,.15); }
+    .card-icon.green  { background: rgba(67,233,123,.12); }
+    .card-icon.red    { background: rgba(255,107,107,.12); }
+    .card-icon.orange { background: rgba(255,166,0,.12);   }
+    .card-icon.purple { background: rgba(200,100,255,.12); }
+
+    .card-title { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .card-subtitle { font-size: .78rem; color: var(--accent); font-weight: 500; }
+    .card-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      margin: 10px 0 14px;
+      line-height: 1.55;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .tag {
+      font-size: .7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .78rem;
+      color: #a89dff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .15s;
+    }
+    .card-link:hover { color: #fff; }
+    .card-link svg { width: 13px; height: 13px; }
+
+    /* ─── CITIES GRID ───────────────────────── */
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .city-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color .2s;
+      cursor: default;
+    }
+    .city-card:hover { border-color: rgba(67,233,123,.4); }
+    .city-name { font-size: .88rem; font-weight: 600; margin-bottom: 2px; }
+    .city-sub  { font-size: .72rem; color: var(--muted); }
+
+    /* ─── TIMELINE ──────────────────────────── */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent3));
+      opacity: .3;
+    }
+    .tl-item { position: relative; padding-bottom: 28px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -21px;
+      top: 5px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .tl-date  { font-size: .75rem; color: #a89dff; font-weight: 600; margin-bottom: 3px; }
+    .tl-title { font-size: .9rem; font-weight: 600; margin-bottom: 3px; }
+    .tl-desc  { font-size: .8rem; color: var(--muted); }
+
+    /* ─── FOOTER ────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    footer a { color: #a89dff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hero-stats { gap: 24px; }
+      .site-grid  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-badge">Web Development Portfolio</div>
+  <h1>Garage Door Client Websites</h1>
+  <p>
+    A collection of <strong>20+ full-stack websites</strong> built as voluntary client work for
+    <strong>Joe Lucey Garage Door &amp; Gate</strong> — a family-owned business with 47+ years of
+    service across Los Angeles &amp; Orange County.
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Websites Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">16</div>
+      <div class="stat-label">City Landing Pages</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Months</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Happy Client</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <div class="section-header">
+    <h2>Tech Stack</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="tech-banner">
+    <span class="tech-tag"><span class="dot"></span>React 18</span>
+    <span class="tech-tag"><span class="dot"></span>TypeScript</span>
+    <span class="tech-tag"><span class="dot"></span>Express.js</span>
+    <span class="tech-tag"><span class="dot"></span>Tailwind CSS</span>
+    <span class="tech-tag"><span class="dot"></span>shadcn/ui</span>
+    <span class="tech-tag"><span class="dot"></span>Radix UI</span>
+    <span class="tech-tag"><span class="dot"></span>TanStack Query</span>
+    <span class="tech-tag"><span class="dot"></span>Drizzle ORM</span>
+    <span class="tech-tag"><span class="dot"></span>PostgreSQL (Neon)</span>
+    <span class="tech-tag"><span class="dot"></span>Vite</span>
+    <span class="tech-tag"><span class="dot"></span>Framer Motion</span>
+    <span class="tech-tag"><span class="dot"></span>Wouter</span>
+    <span class="tech-tag"><span class="dot"></span>Leaflet Maps</span>
+    <span class="tech-tag"><span class="dot"></span>Recharts</span>
+  </div>
+
+  <!-- ═══ MAIN SITES ═══ -->
+  <div class="section-header">
+    <h2>Main Websites</h2>
+    <span class="section-pill">20 Sites</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="site-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Joe Lucey Garage Door &amp; Gate</div>
+          <div class="card-subtitle">Flagship Business Site</div>
+        </div>
+        <div class="card-icon blue">🏠</div>
+      </div>
+      <p class="card-desc">
+        The primary website for Joe Lucey's garage door and gate company. Features service listings,
+        pricing, 47-year legacy story, contact form, and full service area coverage across LA &amp; OC.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Lead Gen</span><span class="tag">Contact Form</span><span class="tag">Service Areas</span>
+      </div>
+      <a class="card-link" href="../Joe%20Lucey%20Garage%20Door%20And%20Gate%20Company/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Crusader 202SS Opener</div>
+          <div class="card-subtitle">Product Landing Page</div>
+        </div>
+        <div class="card-icon orange">⚙️</div>
+      </div>
+      <p class="card-desc">
+        E-commerce style landing page for the Crusader 202SS garage door opener. Image gallery with
+        zoom, specifications, tabbed product info, and a sticky nav with mobile hamburger menu.
+      </p>
+      <div class="card-tags">
+        <span class="tag">E-Commerce</span><span class="tag">Image Gallery</span><span class="tag">Product Specs</span>
+      </div>
+      <a class="card-link" href="../CrusaderDoorInfo/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Genie Garage Door Openers</div>
+          <div class="card-subtitle">Product &amp; Services Showcase</div>
+        </div>
+        <div class="card-icon green">🔑</div>
+      </div>
+      <p class="card-desc">
+        Full showcase website for Genie opener installation and repair. Features product catalogs,
+        FAQ sections, local SEO for LA County &amp; surrounding areas, and customer conversion forms.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Local SEO</span><span class="tag">Product Catalog</span><span class="tag">FAQ</span>
+      </div>
+      <a class="card-link" href="../GenieGarageOpener/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">InteractiveShowcase</div>
+          <div class="card-subtitle">Pricing Calculator + Lead Gen</div>
+        </div>
+        <div class="card-icon purple">💡</div>
+      </div>
+      <p class="card-desc">
+        Interactive platform with a live pricing calculator for opener installation services.
+        Lead generation focus with appointment booking and product comparison tools.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Pricing Calculator</span><span class="tag">Lead Gen</span><span class="tag">Booking</span>
+      </div>
+      <a class="card-link" href="../InteractiveShowcase/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Broken Garage Door Springs</div>
+          <div class="card-subtitle">Service + Repair Site</div>
+        </div>
+        <div class="card-icon red">🔧</div>
+      </div>
+      <p class="card-desc">
+        Dedicated springs repair website for Joseph's 47-year-old business serving LA &amp; Orange County.
+        Includes service pricing, emergency repair info, and customer contact flow.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Service Pricing</span><span class="tag">Emergency Repair</span><span class="tag">Local SEO</span>
+      </div>
+      <a class="card-link" href="../BrokenGarageDoorSprings/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Rossmoor Garage Door Repair</div>
+          <div class="card-subtitle">Hyperlocal Service Page</div>
+        </div>
+        <div class="card-icon blue">📍</div>
+      </div>
+      <p class="card-desc">
+        Hyperlocal landing page for Rossmoor, CA. Responsive design with modern shadcn/ui components,
+        service info, 47-year legacy section, and a Vite + Express monorepo architecture.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Hyperlocal</span><span class="tag">Responsive</span><span class="tag">Service Listing</span>
+      </div>
+      <a class="card-link" href="../Rossmoor/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Official Genie Dealers</div>
+          <div class="card-subtitle">Authorized Dealer Directory</div>
+        </div>
+        <div class="card-icon green">🏪</div>
+      </div>
+      <p class="card-desc">
+        Directory-style site for Genie garage door authorized dealers in LA &amp; Orange County.
+        Features dealer listings, product showcases, and repair service information.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Directory</span><span class="tag">Dealer Listings</span><span class="tag">LA + OC</span>
+      </div>
+      <a class="card-link" href="../OfficialGenie/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Genie Pro Opener Repair</div>
+          <div class="card-subtitle">Service + Pricing Site</div>
+        </div>
+        <div class="card-icon orange">🛠️</div>
+      </div>
+      <p class="card-desc">
+        Focused on Genie Pro repair services across Southern California. Transparent pricing,
+        customer contact form, service area map, and before/after service showcases.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Pricing</span><span class="tag">SoCal Service Area</span><span class="tag">Contact Form</span>
+      </div>
+      <a class="card-link" href="../Genie%20Pro%20Garage%20Door%20Opener%20Repair/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">New Garage Opener</div>
+          <div class="card-subtitle">Multi-Brand Installation Booking</div>
+        </div>
+        <div class="card-icon purple">📦</div>
+      </div>
+      <p class="card-desc">
+        Multi-brand showcase for Genie, Chamberlain, and LiftMaster openers. Customers can browse
+        models and schedule installation appointments directly through the site.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Genie</span><span class="tag">Chamberlain</span><span class="tag">LiftMaster</span><span class="tag">Booking</span>
+      </div>
+      <a class="card-link" href="../New%20Garage%20Opener/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Stolle Garage Door Springs</div>
+          <div class="card-subtitle">Springs Service Site</div>
+        </div>
+        <div class="card-icon red">🔩</div>
+      </div>
+      <p class="card-desc">
+        Service website targeting Stolle-area customers needing garage door spring repair or
+        replacement. Includes service options, pricing guide, and contact flow.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Springs Repair</span><span class="tag">Pricing Guide</span><span class="tag">Local</span>
+      </div>
+      <a class="card-link" href="../Stolle%20Garage%20Door%20Springs/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Sectional Garage Door Springs</div>
+          <div class="card-subtitle">Niche Service Page</div>
+        </div>
+        <div class="card-icon blue">🚪</div>
+      </div>
+      <p class="card-desc">
+        Dedicated to sectional door spring replacement and repair. Educates customers on spring
+        types, safety warnings, and why professional installation matters.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Sectional Doors</span><span class="tag">Education</span><span class="tag">Safety</span>
+      </div>
+      <a class="card-link" href="../Sectional%20Garage%20Door%20Springs/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">New Sectional Garage Door Springs</div>
+          <div class="card-subtitle">Modern Springs Service</div>
+        </div>
+        <div class="card-icon green">✅</div>
+      </div>
+      <p class="card-desc">
+        Updated iteration of the sectional springs service site with newer UI components,
+        expanded service descriptions, and an improved customer inquiry workflow.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Springs</span><span class="tag">Modern UI</span><span class="tag">Inquiry Flow</span>
+      </div>
+      <a class="card-link" href="../New%20Sectional%20Garage%20Door%20Springs/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Repair Broken Garage Door</div>
+          <div class="card-subtitle">Valley Area Repair Site</div>
+        </div>
+        <div class="card-icon red">🚨</div>
+      </div>
+      <p class="card-desc">
+        Emergency repair-focused site for Valley Garage Door Repair, serving San Fernando Valley.
+        Emphasizes fast response times, 24/7 availability, and transparent flat-rate pricing.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Emergency Repair</span><span class="tag">24/7</span><span class="tag">San Fernando Valley</span>
+      </div>
+      <a class="card-link" href="../Repair%20Broken%20Garage%20Door/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Replace Broken Door Springs</div>
+          <div class="card-subtitle">Springs Replacement Service</div>
+        </div>
+        <div class="card-icon orange">💪</div>
+      </div>
+      <p class="card-desc">
+        Valley Garage Door Repair's dedicated springs replacement site. Step-by-step process
+        explanation, safety-first messaging, and a streamlined quote request flow.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Springs Replacement</span><span class="tag">Safety</span><span class="tag">Quote Request</span>
+      </div>
+      <a class="card-link" href="../Replace%20Broken%20Garage%20Door%20Springs/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">New Garage Doors and Gate</div>
+          <div class="card-subtitle">New Installations Site</div>
+        </div>
+        <div class="card-icon blue">🏗️</div>
+      </div>
+      <p class="card-desc">
+        Full new installation showcase for garage doors and gates. Features style galleries,
+        material comparisons, installation timeline, and financing information.
+      </p>
+      <div class="card-tags">
+        <span class="tag">New Installation</span><span class="tag">Style Gallery</span><span class="tag">Financing</span>
+      </div>
+      <a class="card-link" href="../New%20Garage%20Doors%20and%20Gate/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">ReactiveLanding</div>
+          <div class="card-subtitle">High-Conversion Landing Page</div>
+        </div>
+        <div class="card-icon purple">⚡</div>
+      </div>
+      <p class="card-desc">
+        First reactive landing page prototype for the Rossmoor market. Focused on conversion
+        with above-the-fold CTA, trust signals, and minimal friction contact flow.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Conversion</span><span class="tag">CTA</span><span class="tag">Trust Signals</span>
+      </div>
+      <a class="card-link" href="../ReactiveLanding/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Garage Door Springs Template</div>
+          <div class="card-subtitle">Reusable Site Framework</div>
+        </div>
+        <div class="card-icon green">🧩</div>
+      </div>
+      <p class="card-desc">
+        The reusable base template built to accelerate creation of future garage door service sites.
+        Contains shared layouts, reusable components, and configurable service area sections.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Template</span><span class="tag">Reusable</span><span class="tag">Shared Components</span>
+      </div>
+      <a class="card-link" href="../Garage%20Door%20Springs%20Template%20-%20Copy/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon purple" style="margin-bottom:10px">🏋️</div>
+      <div class="card-title">CoachConnect — FitCoach Pro</div>
+      <div class="card-subtitle" style="margin-bottom:10px;font-size:.78rem;color:var(--accent)">Additional Client Project</div>
+      <p class="card-desc">
+        A fitness coaching platform for a separate client. Tools for coaches to manage clients,
+        build workout programs, plan nutrition, and track progress — all in one dashboard.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Fitness Platform</span><span class="tag">Client Mgmt</span><span class="tag">Nutrition Planning</span>
+      </div>
+      <a class="card-link" href="../CoachConnect/client/src" target="_blank">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Source
+      </a>
+    </div>
+
+  </div><!-- /site-grid -->
+
+  <!-- ═══ CITY LANDING PAGES ═══ -->
+  <div class="section-header">
+    <h2>City Landing Pages</h2>
+    <span class="section-pill">16 Cities</span>
+    <div class="section-line"></div>
+  </div>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:20px;">
+    Hyperlocal landing pages built for each city served by Joe Lucey Garage Door &amp; Gate —
+    each tailored with city-specific SEO, local references, and service area maps.
+  </p>
+  <div class="cities-grid">
+    <div class="city-card"><div class="city-name">📍 Agoura Hills</div><div class="city-sub">LA County</div></div>
+    <div class="city-card"><div class="city-name">📍 Granada Hills</div><div class="city-sub">San Fernando Valley</div></div>
+    <div class="city-card"><div class="city-name">📍 Hollywood Hills</div><div class="city-sub">Los Angeles</div></div>
+    <div class="city-card"><div class="city-name">📍 La Cañada</div><div class="city-sub">Foothills Area</div></div>
+    <div class="city-card"><div class="city-name">📍 Lake View Terrace</div><div class="city-sub">San Fernando Valley</div></div>
+    <div class="city-card"><div class="city-name">📍 North Hills</div><div class="city-sub">San Fernando Valley</div></div>
+    <div class="city-card"><div class="city-name">📍 North Hollywood</div><div class="city-sub">Los Angeles</div></div>
+    <div class="city-card"><div class="city-name">📍 Palos Verdes</div><div class="city-sub">South Bay</div></div>
+    <div class="city-card"><div class="city-name">📍 Pasadena</div><div class="city-sub">San Gabriel Valley</div></div>
+    <div class="city-card"><div class="city-name">📍 Rossmoor</div><div class="city-sub">Orange County</div></div>
+    <div class="city-card"><div class="city-name">📍 San Pedro</div><div class="city-sub">Port of Los Angeles</div></div>
+    <div class="city-card"><div class="city-name">📍 Seal Beach</div><div class="city-sub">Orange County</div></div>
+    <div class="city-card"><div class="city-name">📍 Torrance</div><div class="city-sub">South Bay</div></div>
+    <div class="city-card"><div class="city-name">📍 Westwood</div><div class="city-sub">Los Angeles</div></div>
+    <div class="city-card"><div class="city-name">📍 Whittier</div><div class="city-sub">Southeast LA County</div></div>
+    <div class="city-card"><div class="city-name">📍 Woodland Hills</div><div class="city-sub">San Fernando Valley</div></div>
+  </div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="section-header">
+    <h2>Development Timeline</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">June 13, 2025</div>
+      <div class="tl-title">First Build — CrusaderDoorInfo</div>
+      <div class="tl-desc">Launched the Crusader 202SS product landing page — first site in the portfolio with image gallery, specs, and tabbed UI.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">June 14, 2025</div>
+      <div class="tl-title">ReactiveLanding — First Service Site</div>
+      <div class="tl-desc">Built high-conversion landing page for Rossmoor garage door repair with above-the-fold CTA and trust signals.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">June 20, 2025</div>
+      <div class="tl-title">Scale — Rossmoor + 15 City Pages</div>
+      <div class="tl-desc">Launched the main Rossmoor site and simultaneously deployed 15 hyperlocal city landing pages across LA &amp; Orange County.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">June 30 – July 5, 2025</div>
+      <div class="tl-title">Expansion — 3 New Service Sites</div>
+      <div class="tl-desc">Added New Garage Opener (multi-brand booking), GenieGarageOpener (LA County showcase), and InteractiveShowcase (pricing calculator).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">July 5–8, 2025</div>
+      <div class="tl-title">Sprint — 8 Sites in 3 Days</div>
+      <div class="tl-desc">Genie Pro, Replace + Repair Broken Garage Door, New Sectional, New Garage Doors, Stolle, Sectional Springs, and the Joe Lucey flagship site.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">July 11–14, 2025</div>
+      <div class="tl-title">OfficialGenie + BrokenGarageDoorSprings</div>
+      <div class="tl-desc">Authorized dealer directory and the full springs repair + contact flow site. Portfolio now covers every key service offering.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent3)"></div>
+      <div class="tl-date">August 12, 2025</div>
+      <div class="tl-title">New Client — CoachConnect (FitCoach Pro)</div>
+      <div class="tl-desc">Expanded into a new domain: fitness coaching platform with client management, workout planning, and nutrition tools.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Built by <a href="https://github.com/Sreekant13" target="_blank">Sreekant Baheti</a> &nbsp;·&nbsp;
+  Voluntary client work for Joe Lucey Garage Door &amp; Gate &nbsp;·&nbsp;
+  React · TypeScript · Express · Tailwind CSS · shadcn/ui
+</footer>
+
+</body>
+</html>
