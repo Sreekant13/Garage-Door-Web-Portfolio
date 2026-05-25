@@ -8,9 +8,9 @@ Over two months in Summer 2025, I independently designed and built **20+ full-st
 
 ## Live Portfolio Showcase
 
-> **→ Open [`showcase/index.html`](./showcase/index.html) in a browser for the full interactive portfolio**
->
-> The showcase page features cards for every site, the full tech stack, a development timeline, and links directly into each project's source code. Deploy it via **GitHub Pages** for a public-facing portfolio link.
+### **[→ View Live Showcase](https://sreekant13.github.io/Garage-Door-Web-Portfolio/showcase/)**
+
+An interactive portfolio page with cards for every site, the full tech stack, a development timeline, and links directly into each project's source code. Hosted on GitHub Pages.
 
 ---
 
